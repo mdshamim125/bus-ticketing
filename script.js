@@ -3,7 +3,9 @@ const totalSeat = document.getElementById("total-seat").innerText;
 const selectedSeat = document.getElementById("selected-seat-number").innerText;
 let total = document.getElementById("total").innerText;
 const couponButton = document.getElementById("coupon-btn");
+const nextButton = document.getElementById("next");
 
+const listedSeat = [];
 let totalTaka = parseFloat(total);
 let grandTotal = parseFloat(document.getElementById("grand-total").innerText);
 // for removing
@@ -17,9 +19,13 @@ let totalSeatNumber = parseInt(totalSeat);
 let selectedTotalSeats = parseInt(selectedSeat);
 
 for (const seat of seats) {
-  seat.addEventListener("click", function () {
-    if (ticketNumber < 4) {
+ seat.addEventListener("click", function () {
+    if(listedSeat.includes(seat)){
+        alert(`you have already selected ${seat.innerText}`);
+    }
+    else if (ticketNumber < 4) {
       seat.classList.add("bg-primary");
+      listedSeat.push(seat);
       ticketNumber++;
       totalSeatNumber--;
       selectedTotalSeats++;
@@ -60,8 +66,36 @@ for (const seat of seats) {
 
             document.getElementById("grand-total").innerText = grandTaka;
             const coupon = document.getElementById("coupon");
-            coupon.classList.add("hidden");
+            coupon.classList.add("hidden");  
             
+            // next
+            console.log(nextButton);
+            nextButton.addEventListener('click', function() {
+                // console.log("shamim");
+                document.getElementById("vissible-section").classList.add("hidden");
+                document.getElementById("hidden-section").classList.remove("hidden");
+
+            })
+        }
+        else if(givenCoupon === "Couple20"){
+            let discount = 0.2*totalTaka;
+            let grandTaka = totalTaka - discount;
+
+            document.getElementById("grand-total").innerText = grandTaka;
+            const coupon = document.getElementById("coupon");
+            coupon.classList.add("hidden");  
+            
+            // next
+            console.log(nextButton);
+            nextButton.addEventListener('click', function() {
+                // console.log("shamim");
+                document.getElementById("vissible-section").classList.add("hidden");
+                document.getElementById("hidden-section").classList.remove("hidden");
+
+            })
+        }
+        else{
+            alert("Please enter correct coupon code.");
         }
     })
 
