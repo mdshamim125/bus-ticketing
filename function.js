@@ -1,29 +1,9 @@
-// console.log("connected2");
+// functions that are called from script file
 
-function deleteAttributeById(elementId) {
-    document.getElementById(elementId).removeAttribute("disabled");
-}
-
-function setAttributeById(elementId) {
-    document.getElementById(elementId).setAttribute("class", "disabled");
-}
-
-function setBackgroundColorById(elementId){
+function getElementTextById(elementId){
     const element = document.getElementById(elementId);
-    element.classList.add('bg-primary');
-}
-
-function removeBackgroundColorById(elementId){
-    const element = document.getElementById(elementId);
-    element.classList.remove('bg-primary');
-}
-
-
-function getTextElementValueById(elementId){
-    const element = document.getElementById(elementId);
-    const elementValueText = element.innerText;
-    const value = parseInt(elementValueText);
-    return value;
+    const text = element.innerText;
+    return text;
 }
 
 function setTextElementValueById(elementId, value){
@@ -31,8 +11,4 @@ function setTextElementValueById(elementId, value){
     element.innerText = value;
 }
 
-function getElementTextById(elementId){
-    const element = document.getElementById(elementId);
-    const text = element.innerText;
-    return text;
-}
+

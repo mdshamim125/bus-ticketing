@@ -1,17 +1,17 @@
 const seats = document.getElementsByClassName("seat");
-const totalSeat = document.getElementById("total-seat").innerText;
-const selectedSeat = document.getElementById("selected-seat-number").innerText;
-let total = document.getElementById("total").innerText;
+const totalSeat = getElementTextById("total-seat");
+const selectedSeat = getElementTextById("selected-seat-number");
+const total = getElementTextById("total");
 const couponButton = document.getElementById("coupon-btn");
 const nextButton = document.getElementById("next");
 
 const listedSeat = [];
 let totalTaka = parseFloat(total);
-let grandTotal = parseFloat(document.getElementById("grand-total").innerText);
-// for removing
+let grandTotal = parseFloat(getElementTextById("grand-total"));
+
 const element1 = document.getElementById("selected-seat1");
 const element2 = document.getElementById("selected-seat2");
-// for adding
+
 const dynamicElement = document.getElementById("dynamic-ticket");
 
 let ticketNumber = 0;
@@ -19,9 +19,9 @@ let totalSeatNumber = parseInt(totalSeat);
 let selectedTotalSeats = parseInt(selectedSeat);
 
 for (const seat of seats) {
- seat.addEventListener("click", function () {
+  seat.addEventListener("click", function () {
     if(listedSeat.includes(seat)){
-        alert(`you have already selected ${seat.innerText}`);
+      alert(`you have already selected ${seat.innerText}`);
     }
     else if (ticketNumber < 4) {
       seat.classList.add("bg-primary");
@@ -29,9 +29,10 @@ for (const seat of seats) {
       ticketNumber++;
       totalSeatNumber--;
       selectedTotalSeats++;
-      document.getElementById("total-seat").innerText = totalSeatNumber;
-      document.getElementById("selected-seat-number").innerText =
-        selectedTotalSeats;
+
+      setTextElementValueById("total-seat", totalSeatNumber);
+      setTextElementValueById("selected-seat-number", selectedTotalSeats);
+    
       element1.remove();
       element2.remove();
 
@@ -52,26 +53,24 @@ for (const seat of seats) {
       p1.classList.add("inter", "font-medium");
       d.classList.add("flex", "justify-between", "py-4", "inter", "font-medium");
 
-        // total amount
+    // total amount
       totalTaka = selectedTotalSeats*550;
-      document.getElementById("total").innerText = totalTaka;
+      setTextElementValueById("total", totalTaka);
 
     // grand total amount
-
     couponButton.addEventListener('click', function(){
         const givenCoupon = document.getElementById("coupon-text").value;
         if(givenCoupon === "NEW 15"){
             let discount = 0.15*totalTaka;
             let grandTaka = totalTaka - discount;
 
-            document.getElementById("grand-total").innerText = grandTaka;
+            setTextElementValueById("grand-total", grandTaka);
             const coupon = document.getElementById("coupon");
             coupon.classList.add("hidden");  
             
             // next
             console.log(nextButton);
             nextButton.addEventListener('click', function() {
-                // console.log("shamim");
                 document.getElementById("vissible-section").classList.add("hidden");
                 document.getElementById("hidden-section").classList.remove("hidden");
 
@@ -81,7 +80,7 @@ for (const seat of seats) {
             let discount = 0.2*totalTaka;
             let grandTaka = totalTaka - discount;
 
-            document.getElementById("grand-total").innerText = grandTaka;
+            setTextElementValueById("grand-total", grandTaka);
             const coupon = document.getElementById("coupon");
             coupon.classList.add("hidden");  
             
@@ -104,6 +103,8 @@ for (const seat of seats) {
     }
   });
 }
+
+// Alhamdulillah, completed...
 
 
 
